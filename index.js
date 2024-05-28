@@ -4,7 +4,7 @@ const { json } = require('body-parser');
 require('dotenv').config();
 
 const app = express();
-const port = 4000;
+const port = 3000;
 
 const API_KEY = process.env.API_KEY;
 
@@ -20,11 +20,12 @@ app.get('/', (req, res) => {
   axios.get(url)
     .then(response => {
         const data = response.data;
-        const dailyData = data.timelines.dily[0];
-        //
+        const dailyData = data.timelines.daily[0];
+        
         console.log(dailyData);
         const cityName = "Nigeria";
         const temperature = dailyData.values.temperatureAvg;
+	const sunsetTime = dailyData.values.sunsetTime;
         const sunsetTime = new Date(sunsetTimeString).toISOString().slice(11,16);
         const message = `City Name: ${cityName}<br>Temperature: ${temperature}&deg;C<br>Sunset Time: ${sunsetTime}`;
         
